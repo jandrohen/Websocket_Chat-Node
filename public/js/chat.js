@@ -53,8 +53,8 @@ const connectSocket = async() =>{
 
     });
 
-    socket.on('active-users', ()=>{
-
+    socket.on('active-users', ( payload ) => {
+        console.log(payload)
     });
 
     socket.on('private-message', ()=>{
