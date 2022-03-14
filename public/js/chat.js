@@ -5,6 +5,14 @@ const url = ( window.location.hostname.includes('localhost'))
 let userAuth = null;
 let socket = null;
 
+// Reference HTML
+const  txtUid = document.querySelector('#txtUid');
+const  txtMsg = document.querySelector('#txtMsg');
+const  ulUsers = document.querySelector('#ulUsers');
+const  ulMsg = document.querySelector('#ulMsg');
+const  btnOut = document.querySelector('#btnOut');
+
+
 const validateJWT = async() =>{
     const token = localStorage.getItem('token') || '';
 
@@ -26,12 +34,34 @@ const validateJWT = async() =>{
 }
 
 const connectSocket = async() =>{
-    const socket = io({
+
+    socket = io({
         'extraHeaders':{
             'x-token': localStorage.getItem('token')
         }
     });
+
+    socket.on('connect', () =>{
+        console.log('sockets online')
+    })
+
+    socket.on('disconnect', () =>{
+        console.log('sockets offline')
+    })
+
+    socket.on('receive-message', ()=>{
+
+    });
+
+    socket.on('active-users', ()=>{
+
+    });
+
+    socket.on('private-message', ()=>{
+
+    });
 }
+
 const main = async () => {
     await validateJWT();
 }
