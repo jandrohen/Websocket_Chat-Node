@@ -33,49 +33,22 @@
         </button>
     </div>
     <div class="col-sm-6">
+        <h1>Login Normal</h1>
+        <hr>
+        <form class="d-grid">
+        <input type="text" name="email" class="form-control mb-2" placeholder="Correo">
+        <input type="password" name="password" class="form-control mb-2" placeholder="Password">
 
+        <button type="submit" class="btn btn-primary">
+            Ingresar
+        </button>
+        </form>
     </div>
     </div>
 
 
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script>
-        var url = ( window.location.hostname.includes('localhost'))
-            ? 'http://localhost:8080/api/auth/google'
-            : 'https://restserver-curso-node-8.herokuapp.com/api/auth/google'
-
-        function handleCredentialResponse(response) {
-            // GOOGLE TOKEN : ID_TOKEN
-            // console.log('id_token', response.credential);
-            const body = { id_token: response.credential}
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            })
-                .then( r => r.json() )
-                .then( resp => {
-                    console.log(resp)
-                    localStorage.setItem('email', resp.user.email );
-                })
-                .catch( console.warn)
-        }
-
-        const button = document.getElementById('google-signout');
-        button.onclick = () => {
-
-            console.log( google.accounts.id )
-            google.accounts.id.disableAutoSelect();
-
-            google.accounts.id.revoke( localStorage.getItem('email'), done => {
-                localStorage.clear();
-                location.reload();
-            })
-        }
-    </script>
+    <script src="js/auth.js"> </script>
 </body>
 </html>
