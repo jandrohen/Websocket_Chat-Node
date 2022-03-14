@@ -14,6 +14,7 @@ const socketController = async (socket = new Socket(), io ) => {
     // Add the logged in user
     chatMessages.connectUser( userAuth );
     io.emit('active-users', chatMessages.usersArr )
+    socket.emit('receive-message', chatMessages.last10)
 
     // Clean when a user logs out
     socket.on('disconnect', ()=>{
